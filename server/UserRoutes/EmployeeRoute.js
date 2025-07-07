@@ -92,7 +92,18 @@ router2.post('/createcategory', async (req, res) => {
 });
 
 
-
+router2.delete('/deleteemployee/:id',async(req,res)=>{
+    const {id}=req.params
+try {
+    const sql=await pool.query('DELETE FROM employees where id=$1',[id])
+     res.status(201).json({
+      message: 'employees successfully deleted',
+      deletedemployee: sql.rows[0]
+    });
+} catch (err) {
+    res.status(500).json({ error: err.message });
+}
+})
 
 
 export default router2;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/employeeList.css';
 
 const EmployeeList = () => {
@@ -8,21 +8,32 @@ const EmployeeList = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const res = await axios.get('http://localhost:5000/allemployees');
-        setEmployees(res.data);
-        setError('');
-      } catch (err) {
-        const msg = err.response?.data?.message || 'Something went wrong';
-        setError(msg);
-        if (err.response?.status === 401) navigate('/adminlogin');
-      }
-    };
+  const fetchEmployees = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/allemployees');
+      setEmployees(res.data);
+      setError('');
+    } catch (err) {
+      const msg = err.response?.data?.message || 'Something went wrong';
+      setError(msg);
+      if (err.response?.status === 401) navigate('/adminlogin');
+    }
+  };
 
+  useEffect(() => {
     fetchEmployees();
   }, [navigate]);
+
+  const deleteemployee = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/deleteemployee/${id}`);
+      // Refresh list after deletion
+      fetchEmployees();
+    } catch (err) {
+      const message = err.response?.data?.message || 'Something went wrong';
+      setError(message);
+    }
+  };
 
   return (
     <div className="outline-container">
@@ -43,6 +54,7 @@ const EmployeeList = () => {
               <th>Phone</th>
               <th>Category</th>
               <th>Salary</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -55,14 +67,21 @@ const EmployeeList = () => {
                 <td>{e.phone}</td>
                 <td>{e.category_name}</td>
                 <td>{e.salary}</td>
+                <td>
+                  <button onClick={() => deleteemployee(e.id)} className="delete-btn">
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </section>
 
-      <div className='add'>
-      <Link to="/adminDashboard/addemployee"><button>Add employee</button></Link>
+      <div className="add">
+        <Link to="/adminDashboard/addemployee">
+          <button>Add employee</button>
+        </Link>
       </div>
     </div>
   );

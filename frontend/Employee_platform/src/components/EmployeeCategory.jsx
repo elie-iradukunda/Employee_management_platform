@@ -54,7 +54,7 @@ const EmployeeCategory = () => {
         </table>
 
          <div className='add'>
-      <Link to="/adminDashboard/addemployeecategory"><button>Add category</button></Link>
+      <Link to="/adminDashboard/add"><button>Add category</button></Link>
       </div>
       </section>
 

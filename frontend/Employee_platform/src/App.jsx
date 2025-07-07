@@ -10,6 +10,7 @@ import Adminprofile      from './components/Adminprofile';
 import EmployeeList      from './components/EmployeeList';
 import Logout            from './components/Logout';
 import AddEmployee from './components/AddEmployee';
+import Addcategory from './components/Addcategory';
 
 const App = () => (
   <BrowserRouter>
@@ -24,6 +25,8 @@ const App = () => (
         <Route path="category" element={<EmployeeCategory />} />
         <Route path="profile" element={<Adminprofile />} />
          <Route path="addemployee" element={<AddEmployee />} />
+         <Route path="add" element={<Addcategory />} />
+
       </Route>
 
       <Route path="/logout" element={<Logout />} />
