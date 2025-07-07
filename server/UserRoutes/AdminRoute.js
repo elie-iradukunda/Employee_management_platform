@@ -27,13 +27,25 @@ router.post('/createAdmin', async (req, res) => {
 
 
 
-router.get('/admins', async (req, res) => {
+router.post('/admins', async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const result = await pool.query('SELECT * FROM admin');
-    res.json(result.rows);
+    const result = await pool.query(
+      'SELECT * FROM admin WHERE email = $1 AND password = $2',
+      [email, password]
+    );
+
+    if (result.rows.length > 0) {
+      res.json({ success: true, admin: result.rows[0] });
+    } else {
+      res.status(401).json({ success: false, message: 'Invalid email or password' });
+    }
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 export default router;

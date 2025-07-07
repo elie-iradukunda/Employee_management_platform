@@ -14,20 +14,21 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      
-      const response = await axios.get('http://localhost:5000/admins', logins);
-      console.log("User logged in:", response.data);
+  try {
+    const response = await axios.post('http://localhost:5000/admins', logins);
 
-      setError('');
-      navigate('/adminDashboard');
-    } catch (err) {
-      const message = err.response?.data?.message || 'Something went wrong';
-      setError(message);
-    }
-  };
+    console.log("User logged in:", response.data);
+
+    setError('');
+    navigate('/adminDashboard');
+  } catch (err) {
+    const message = err.response?.data?.message || 'Something went wrong';
+    setError(message);
+  }
+};
+
 
   return (
     <div className="login-container">
