@@ -1,13 +1,16 @@
-import React from 'react'
-import Navbars from './Navbars'
+import React from 'react';
+import Navbars from './Navbars';
+import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-   <>
-   <h1>Dashboard</h1>
-   <Navbars/>
-   </>
-  )
-}
+    <div>
+      <Navbars />
+      <div className="main-content">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

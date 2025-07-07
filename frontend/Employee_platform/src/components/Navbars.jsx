@@ -11,7 +11,7 @@ const Navbars = () => {
         <Link to="/adminDashboard/employeesList">Manage Employees</Link>
         <Link to="/adminDashboard/category">Category</Link>
         <Link to="/adminDashboard/profile">Profile</Link>
-        <Link to="/logout">Logout</Link>
+        <Link to="/adminlogin">Logout</Link>
       </nav>
     </div>
   );

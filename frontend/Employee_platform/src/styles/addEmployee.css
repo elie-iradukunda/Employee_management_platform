@@ -1,0 +1,39 @@
+
+@import './employeeList.css';    
+
+.emp-form {
+  display: grid;
+  gap: 15px;
+}
+
+.emp-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.emp-form input,
+.emp-form select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.emp-form button {
+  width: 160px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ad00cc;
+  color: #fff;
+  cursor: pointer;
+}
+
+.emp-form button:hover {
+  background-color: #6aa300;
+}
+
+.error  { color: #c00; margin-top: 10px; }
+.success{ color: #087b00; margin-top: 10px; }
