@@ -8,6 +8,11 @@ const EmployeeList = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+ const handleEdit = (employee) => {
+  navigate('/adminDashboard/updateemployee', { state: { employee } });
+};
+
+
   const fetchEmployees = async () => {
     try {
       const res = await axios.get('http://localhost:5000/allemployees');
@@ -27,7 +32,7 @@ const EmployeeList = () => {
   const deleteemployee = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/deleteemployee/${id}`);
-      // Refresh list after deletion
+      
       fetchEmployees();
     } catch (err) {
       const message = err.response?.data?.message || 'Something went wrong';
@@ -71,6 +76,15 @@ const EmployeeList = () => {
                   <button onClick={() => deleteemployee(e.id)} className="delete-btn">
                     Delete
                   </button>
+                </td>
+                 <td>
+                  
+                  <button className="updatebtn" onClick={() => handleEdit(e)}>
+  Update
+</button>
+
+                 
+                 
                 </td>
               </tr>
             ))}

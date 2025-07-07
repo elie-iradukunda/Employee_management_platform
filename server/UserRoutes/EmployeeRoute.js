@@ -106,4 +106,41 @@ try {
 })
 
 
+router2.put('/updateemployee/:id', async (req, res) => {
+  const { fullname, email, location, phone, employeecategory, salary } = req.body;
+  const { id } = req.params;
+
+  try {
+   
+    const checking = await pool.query(
+      'SELECT * FROM employees WHERE (phone = $1 OR email = $2) AND id != $3',
+      [phone, email, id]
+    );
+
+    if (checking.rowCount > 0) {
+     return res.status(409).json({ message: 'check email or phone duplication!!😂👌' });
+    }
+
+    
+    const updateQuery = `
+      UPDATE employees
+      SET fullname = $1, email = $2, location = $3, phone = $4, employeecategory = $5, salary = $6
+      WHERE id = $7
+      RETURNING *;
+    `;
+
+    const updated = await pool.query(updateQuery, [
+      fullname, email, location, phone, employeecategory, salary, id
+    ]);
+
+    res.status(200).json({ message: 'Employee updated successfully', data: updated.rows[0] });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
+
 export default router2;

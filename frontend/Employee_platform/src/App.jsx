@@ -11,6 +11,7 @@ import EmployeeList      from './components/EmployeeList';
 import Logout            from './components/Logout';
 import AddEmployee from './components/AddEmployee';
 import Addcategory from './components/Addcategory';
+import UpdateEmployee from './components/UpdateEmployee';
 
 const App = () => (
   <BrowserRouter>
@@ -26,6 +27,7 @@ const App = () => (
         <Route path="profile" element={<Adminprofile />} />
          <Route path="addemployee" element={<AddEmployee />} />
          <Route path="add" element={<Addcategory />} />
+         <Route path="updateemployee" element={<UpdateEmployee />} />
 
       </Route>
 

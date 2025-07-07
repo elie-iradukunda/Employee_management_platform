@@ -64,7 +64,21 @@
   background-color: #56e818;
 }
 
-.delete-btn {
+.updatebtn {
+  background-color: #0eda77;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.updatebtn:hover {
+  background-color: #2b84c0;
+}
+
+
+.delete-btn{
   background-color: #df0000;
   color: white;
   border: none;
